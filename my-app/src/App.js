@@ -80,7 +80,8 @@ function App() {
     let thepath = window.location.pathname;
     if (localStorage.getItem(thepath)) {
       console.log("found the path in localstorage : ", thepath);
-      setCurrentPoll(pollquestions[parseInt(localStorage.getItem(thepath))]);
+      setCurrentPoll(pollquestions.filter((poll) => poll.id == localStorage.getItem(thepath))[0]);
+      //setCurrentPoll(pollquestions[parseInt(localStorage.getItem(thepath))]);
     } else {
       let items = localStorage.getItem("assignedpaths");
       if (items) {
@@ -108,7 +109,7 @@ function App() {
         setCurrentPoll(pollquestions.filter((poll) => poll.id == "1")[0]);
       }
     }
-  }, [pollquestions]);
+  }, [pollquestions, window.location.pathname]);
 
   return (
     <div className="App" id="hwouter">
